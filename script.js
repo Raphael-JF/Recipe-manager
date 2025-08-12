@@ -6,7 +6,7 @@ async function initDB() {
         locateFile: file => `sql-wasm.wasm`
     });
 
-    const response = await fetch('recettes.db');
+    const response = await fetch('recipes.db');
     const buffer = await response.arrayBuffer();
     db = new SQL.Database(new Uint8Array(buffer));
 
@@ -17,7 +17,7 @@ function afficherListe() {
     const ul = document.getElementById('liste');
     ul.innerHTML = '';
 
-    const res = db.exec("SELECT id, titre FROM recettes ORDER BY titre ASC");
+    const res = db.exec("SELECT id, title FROM recipes ORDER BY title ASC");
 
     if (res.length > 0) {
         const rows = res[0].values;
@@ -31,7 +31,7 @@ function afficherListe() {
 }
 
 function editRecette(id) {
-    const res = db.exec(`SELECT id, titre, ingredients, instructions FROM recettes WHERE id=${id}`);
+    const res = db.exec(`SELECT id, title, original_ingredients_list, instructions_list FROM recipes WHERE id=${id}`);
     if (res.length === 0) return;
 
     const [recette] = res[0].values;
