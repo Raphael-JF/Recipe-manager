@@ -1,4 +1,4 @@
-let db;
+let DB;
 let SQL;
 
 async function initDB() {
@@ -8,7 +8,7 @@ async function initDB() {
 
     const response = await fetch('recipes.db');
     const buffer = await response.arrayBuffer();
-    db = new SQL.Database(new Uint8Array(buffer));
+    DB = new SQL.Database(new Uint8Array(buffer));
 
     afficherListe();
 }
@@ -17,7 +17,7 @@ function afficherListe() {
     const ul = document.getElementById('liste');
     ul.innerHTML = '';
 
-    const res = db.exec("SELECT id, title FROM recipes ORDER BY title ASC");
+    const res = DB.exec("SELECT id, title FROM recipes ORDER BY title ASC");
 
     if (res.length > 0) {
         const rows = res[0].values;
@@ -31,7 +31,7 @@ function afficherListe() {
 }
 
 function editRecette(id) {
-    const res = db.exec(`SELECT id, title, original_ingredients_list, instructions_list FROM recipes WHERE id=${id}`);
+    const res = DB.exec(`SELECT id, title, original_ingredients_list, instructions_list FROM recipes WHERE id=${id}`);
     if (res.length === 0) return;
 
     const [recette] = res[0].values;
@@ -53,7 +53,7 @@ function updateRecette(id) {
     const ingredients = document.getElementById('ingredients').value;
     const instructions = document.getElementById('instructions').value;
 
-    db.run(`UPDATE recettes SET titre = ?, ingredients = ?, instructions = ? WHERE id = ?`,
+    DB.run(`UPDATE recettes SET titre = ?, ingredients = ?, instructions = ? WHERE id = ?`,
         [titre, ingredients, instructions, id]);
 
     afficherListe();
@@ -70,16 +70,16 @@ document.getElementById('ajouter-recette').addEventListener('click', () => {
     const titre = prompt("Titre de la recette ?");
     if (!titre) return;
 
-    db.run(`INSERT INTO recettes (titre, ingredients, instructions) VALUES (?, '', '')`, [titre]);
+    DB.run(`INSERT INTO recettes (titre, ingredients, instructions) VALUES (?, '', '')`, [titre]);
     afficherListe();
 });
 
 document.getElementById('download-db').addEventListener('click', () => {
-    const data = db.export();
+    const data = DB.export();
     const blob = new Blob([data], { type: 'application/octet-stream' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'recettes.db';
+    a.download = 'recipes.db';
     a.click();
 });
 
