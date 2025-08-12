@@ -6,7 +6,7 @@ async function initDB() {
         locateFile: file => `sql-wasm.wasm`
     });
 
-    const response = await fetch('recipes.db');
+    const response = await fetch('../recipes/recipes.db');
     const buffer = await response.arrayBuffer();
     DB = new SQL.Database(new Uint8Array(buffer));
 
@@ -79,7 +79,7 @@ document.getElementById('download-db').addEventListener('click', () => {
     const blob = new Blob([data], { type: 'application/octet-stream' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'recipes.db';
+    a.download = '../recipes/recipes.db';
     a.click();
 });
 
