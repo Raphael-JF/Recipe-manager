@@ -1,4 +1,4 @@
-const DB_PATH = '../../recipes/recipes.db'
+const DB_PATH = '../recipes.db'
 const itemsPerPage = 10
 
 let currentPage = 1;
