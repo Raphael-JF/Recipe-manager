@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+    if (location.hostname === 'localhost') {
+        document.write('<base href="./docs">');
+    } else {
+        document.write('<base href="/Recipe-manager/">');
+    }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirection...</title>
 </head>
-<body onload="window.location.href = 'recipes/recipes.html';">
+<body onload="window.location.href = 'recipes-page/recipes.html';">
 </body>
 </html>
