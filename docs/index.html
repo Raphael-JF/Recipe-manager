@@ -1,40 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion Recettes</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="sql-wasm.js"></script>
+    <title>Redirection...</title>
 </head>
-<body>
-    <header>
-        <h1>📖 Gestion Recettes</h1>
-    </header>
-
-    <main>
-        <div id="recette-list">
-            <h2>Liste des recettes</h2>
-            <ul id="liste"></ul>
-            <button id="ajouter-recette">➕ Ajouter une recette</button>
-        </div>
-
-        <div id="recette-edit" class="hidden">
-            <h2 id="edit-title">Modifier la recette</h2>
-            <form id="form-edit">
-                <label>Titre:<br><input type="text" id="titre"></label><br>
-                <label>Ingrédients:<br><textarea id="ingredients"></textarea></label><br>
-                <label>Instructions:<br><textarea id="instructions"></textarea></label><br>
-                <button type="submit">💾 Sauvegarder</button>
-                <button type="button" id="retour">⬅ Retour</button>
-            </form>
-        </div>
-
-        <div>
-            <button id="download-db">⬇ Télécharger la base modifiée</button>
-        </div>
-    </main>
-
-    <script src="script.js"></script>
+<body onload="window.location.href = 'recipes/recipes.html';">
 </body>
 </html>

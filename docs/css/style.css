@@ -1,0 +1,81 @@
+main {
+    margin-top: 60px; /* Account for the fixed header height */
+    padding: 10px;
+}
+
+body {
+    font-family: "Computer Modern Bright";
+    margin: 0; padding: 0;
+    background: #fafafa;
+}
+
+header {
+    background: #333;
+    color: white;
+    padding: 0px;
+    margin: 0px;
+    text-align: center;
+    position: fixed; 
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    width: 100%;
+}
+
+header nav {
+    margin: 5px;
+    align-self: center;  
+}
+
+header nav a {
+    display: inline-block; /* Change le comportement des liens en blocs pour qu'ils se trouvent sur la même ligne */
+    background: #333;  /* Couleur d'arrière-plan du bouton */
+    color: rgb(235, 235, 235);        /* Couleur du texte (blanc) */
+    padding: 8px 12px;   /* Marge intérieure pour l'espace entre le texte et les bordures */
+    font-weight: bold;
+    border: none;         /* Aucune bordure */
+    margin-left: 5px;     /* Marge extérieure gauche pour séparer les liens du bouton précédent */
+    text-decoration: none;/* Retire le soulignement par défaut des liens */
+    border-radius: 5px;   /* Arrondi des angles du bouton */
+}
+
+header nav a:hover {
+    background: #0056b3;  /* Couleur d'arrière-plan lors de la survolée (clair pour un meilleur contraste) */
+}
+
+/* button {
+    margin-top: 5px;
+    padding: 8px 12px;
+    border: none;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+} */
+
+ul li.recipe_suggestion {
+    margin-top: 5px; 
+    cursor: pointer;
+}
+ul li.recipe_suggestion:hover{
+    text-decoration: underline;
+}
+
+textarea, input {
+    width: 100%;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+#search-bar {
+    width: 75%;
+    margin:auto
+}
+
+.hidden {
+    display: none;
+}

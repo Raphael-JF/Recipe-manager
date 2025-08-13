@@ -87,7 +87,7 @@ def first_phase():
     c2 = conn2.cursor()
 
     c.execute("DROP TABLE IF EXISTS ingredients")
-    c.execute("CREATE TABLE ingredients (id INTEGER PRIMARY KEY, name TEXT, density REAL);")
+    c.execute("CREATE TABLE ingredients (id INTEGER PRIMARY KEY, name_fr TEXT, name_en TEXT, density REAL);")
 
     # Fetch all rows from the recipes table
     c.execute("SELECT * FROM recipes")
@@ -112,19 +112,19 @@ def first_phase():
             #         if isinstance(obj.amount[0].unit,str):
             #             print(formatted_raw_ing, "|",obj.amount[0].unit)
 
-            if obj.name == []:
+            if obj.name_en == [] or recipe_row[1] == "":
                 remove_recipe(recipe_row[0])
             else:
-                ingredient = obj.name[0].text
-                c.execute("SELECT * FROM ingredients WHERE name=?", [ingredient])
+                ingredient = obj.name_en[0].text
+                c.execute("SELECT * FROM ingredients WHERE name_en=?", [ingredient])
                 data = c.fetchone()
                 if not data:
                     c2.execute("SELECT density FROM densites WHERE name_en=?", [ingredient])
                     density = c2.fetchone()
                     if density != None:
-                        c.execute("INSERT INTO ingredients(name, density) VALUES (?, ?)", [ingredient, float(density[0])])
+                        c.execute("INSERT INTO ingredients(name_en, density) VALUES (?, ?)", [ingredient, float(density[0])])
                     else:
-                        c.execute("INSERT INTO ingredients(name, density) VALUES (?, ?)", [ingredient, None])
+                        c.execute("INSERT INTO ingredients(name_en, density) VALUES (?, ?)", [ingredient, None])
 
 
 #-----------------------------------------------
@@ -225,8 +225,8 @@ CREATE TABLE recipe_ingredients(
             # print(formatted_raw_ing,"au final:", f"'{db_amount}'", f"'{db_unit}'")
 
            
-            ingredient = obj.name[0].text
-            c.execute("SELECT id FROM ingredients WHERE name=?", [ingredient])
+            ingredient = obj.name_en[0].text
+            c.execute("SELECT id FROM ingredients WHERE name_en=?", [ingredient])
             ingredient_id = c.fetchone()
             if obj.amount != []:
                 obj_amount = obj.amount[0].text
@@ -259,6 +259,7 @@ if __name__ == "__main__":
     c.execute("ALTER TABLE recipes RENAME Ingredients TO original_ingredients_list;")
     c.execute("ALTER TABLE recipes RENAME Instructions TO instructions_list;")
     c.execute("ALTER TABLE recipes ADD COLUMN language TEXT;")
+    c.execute("ALTER TABLE recipes ADD COLUMN grade TEXT;")
     c.execute("UPDATE recipes SET language = 'english' WHERE 1=1")
 
 
