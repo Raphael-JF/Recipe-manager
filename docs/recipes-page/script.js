@@ -25,7 +25,7 @@ function displayResultsRows() {
     const end = currentPage * itemsPerPage;
 
     let toDisplay = currentResultsRows.slice(start, end)
-    const listElement = document.getElementById('liste');
+    const listElement = document.getElementById('recipes-list');
     listElement.innerHTML = "";
     for (let i = 0; i < toDisplay.length && i < itemsPerPage; i++) {
         let li = document.createElement('li');
@@ -55,10 +55,12 @@ function updateResultsRows(query) {
         }
     }
     console.log(currentResultsRows.length)
-    document.getElementById("page-input").max = Math.ceil(currentResultsRows.length / itemsPerPage);
-    document.getElementById("page-input").value = 1
+    pageInput = document.getElementById("page-input")
+    pageInput.max = Math.ceil(currentResultsRows.length / itemsPerPage);
+    pageInput.value = 1
+    pageInput.style.width = (pageInput.value.length + 3) + 'ch'
     handle_page_input()
-    document.getElementById("page-input-denominator").textContent = "/ "+document.getElementById('page-input').max
+    document.getElementById("page-input-container").children[2].textContent = "/ "+document.getElementById('page-input').max
 
     displayResultsRows()
 
@@ -98,6 +100,7 @@ function updaterecipe(id) {
 function handle_page_input(){
     let pageInput = document.getElementById('page-input')
     pageInput.value = Math.max(1,Math.min(pageInput.max, pageInput.value))
+    pageInput.style.width = (pageInput.value.length + 3) + 'ch'
     currentPage = pageInput.value
     if (pageInput.value == 1){
         document.getElementById('prev').className = "page-btn-disabled"
@@ -146,29 +149,5 @@ document.getElementById('prev').addEventListener("click", (e) => {
         displayResultsRows()
     }
 })
-
-document.getElementById('retour').addEventListener('click', () => {
-    document.getElementById('recipe-list').classList.remove('hidden');
-    document.getElementById('recipe-edit').classList.add('hidden');
-});
-
-document.getElementById('ajouter-recipe').addEventListener('click', () => {
-    const titre = prompt("Titre de la recipe ?");
-    if (!titre) return;
-
-    DB.run(`INSERT INTO recipes (titre, ingredients, instructions) VALUES (?, '', '')`, [titre]);
-    afficherListe();
-});
-
-document.getElementById('download-db').addEventListener('click', () => {
-    const data = DB.export();
-    const blob = new Blob([data], { type: 'application/octet-stream' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = DB_PATH;
-    a.click();
-});
-
-
 
 initDB();

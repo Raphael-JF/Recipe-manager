@@ -1,47 +1,75 @@
-main {
-    margin-top: 60px; /* Account for the fixed header height */
-    padding: 10px;
+:root {
+    --header-height: clamp(2.5rem, calc(3vw + 1rem), 3rem);
+    --search-bar-font-size: clamp(1rem, calc(1.5vw + 1rem), 3rem);
+    --font-size:clamp(0.5rem, calc(0.25vw + 1rem), 3rem)
 }
 
 body {
     font-family: "Computer Modern Bright";
-    margin: 0; padding: 0;
+    margin: 0; 
+    padding: 0;
     background: #fafafa;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    /* gap:20px; */
+    
 }
 
 header {
     background: #333;
-    color: white;
     padding: 0px;
     margin: 0px;
-    text-align: center;
-    position: fixed; 
+    height: var(--header-height);
     display: flex;
+    flex-direction:  line;
     justify-content: space-between;
-    top: 0;
+}
+
+
+main {
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 header nav {
-    margin: 5px;
-    align-self: center;  
+    display: flex;
+    border: 1px solid greenyellow;
+    gap: 20px;
 }
 
 header nav a {
-    display: inline-block; /* Change le comportement des liens en blocs pour qu'ils se trouvent sur la même ligne */
-    background: #333;  /* Couleur d'arrière-plan du bouton */
-    color: rgb(235, 235, 235);        /* Couleur du texte (blanc) */
-    padding: 8px 12px;   /* Marge intérieure pour l'espace entre le texte et les bordures */
+    /* display: inline-block;  */
+    background: #333;  
+    color: rgb(235, 235, 235);
+    padding: 8px 12px;  
     font-weight: bold;
-    border: none;         /* Aucune bordure */
-    margin-left: 5px;     /* Marge extérieure gauche pour séparer les liens du bouton précédent */
-    text-decoration: none;/* Retire le soulignement par défaut des liens */
-    border-radius: 5px;   /* Arrondi des angles du bouton */
+    text-decoration: none;
+    border-radius: 5px;
 }
 
 header nav a:hover {
     background: #0056b3;  /* Couleur d'arrière-plan lors de la survolée (clair pour un meilleur contraste) */
 }
+
+h1 {
+    font-size: clamp(1.5rem, calc(3vw + 1rem), 3.5rem);
+    max-height: 30px;
+
+}
+
+#search-bar {
+    font-size: var(--search-bar-font-size);
+    max-width: 700px;
+    max-height: 30px;
+}
+
+
+
+
 
 /* button {
     margin-top: 5px;
@@ -65,11 +93,6 @@ ul li.recipe_suggestion:hover{
     text-decoration: underline;
 }
 
-textarea, input {
-    width: 100%;
-    padding: 5px;
-    margin: 5px 0;
-}
 
 #search-bar {
     width: 75%;
