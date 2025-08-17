@@ -112,10 +112,10 @@ def first_phase():
             #         if isinstance(obj.amount[0].unit,str):
             #             print(formatted_raw_ing, "|",obj.amount[0].unit)
 
-            if obj.name_en == [] or recipe_row[1] == "":
+            if obj.name == [] or recipe_row[1] == "":
                 remove_recipe(recipe_row[0])
             else:
-                ingredient = obj.name_en[0].text
+                ingredient = obj.name[0].text
                 c.execute("SELECT * FROM ingredients WHERE name_en=?", [ingredient])
                 data = c.fetchone()
                 if not data:
@@ -225,7 +225,7 @@ CREATE TABLE recipe_ingredients(
             # print(formatted_raw_ing,"au final:", f"'{db_amount}'", f"'{db_unit}'")
 
            
-            ingredient = obj.name_en[0].text
+            ingredient = obj.name[0].text
             c.execute("SELECT id FROM ingredients WHERE name_en=?", [ingredient])
             ingredient_id = c.fetchone()
             if obj.amount != []:

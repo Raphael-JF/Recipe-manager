@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            *{
+                margin:0;
+                padding: 0;
+            }
+            .container {
+                margin: 0;
+                max-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                align-items: center; 
+            }
+            
+            .item1, .item2, .item3 {
+                height: 400px;
+                background-color: cyan;
+                 /* ou toute autre valeur que vous souhaitez */
+            }
+            
+            .item1 {
+                flex-grow: 1; /* cet élément va essayer d'agrandir pour couvrir tout l'espace disponible */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="item1">Item 1</div>
+            <div class="item2">Item 2</div>
+            <div class="item3">Item 3</div>
+        </div>
+    </body>
+</html>

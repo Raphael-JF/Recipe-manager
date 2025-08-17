@@ -12,16 +12,17 @@
     <script src="../js/sql-wasm.js"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <a href="recipes.html" style="background-color: rgb(92, 92, 92);">Recettes</a>
-            <a href="ingredients.html">Ingrédients</a>
-        </nav>
-    </header>
+    <nav>
+        <a href="recipes.html" style="background-color: rgb(92, 92, 92);">Recettes</a>
+        <a href="ingredients.html">Ingrédients</a>
+    </nav>
 
     <main>
         <h1>📖 Gestion Recettes</h1>
-        <input type="text" id="search-bar" placeholder="Rechercher une recette..." />
+        <div id="search-bar-div">
+            <img src="../assets/search-icon.svg" alt="Search Icon" id="search-icon">
+            <textarea id="search-bar" onkeydown="return (event.keyCode != 13);" placeholder="Rechercher une recette..."></textarea>
+        </div>
         <ul id="recipes-list"></ul>
         <div id="pagination">
             <button id="prev" class="page-btn-disabled">Précédent</button>

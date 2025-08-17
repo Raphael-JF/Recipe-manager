@@ -1,5 +1,5 @@
 const DB_PATH = '../recipes.db'
-const itemsPerPage = 10
+const itemsPerPage = 80
 
 let currentPage = 1;
 let currentResultsRows = [];
@@ -17,6 +17,7 @@ async function initDB() {
     const response = await fetch(DB_PATH);
     const buffer = await response.arrayBuffer();
     DB = new SQL.Database(new Uint8Array(buffer));
+    // DB.exec("INSERT INTO recipes(title) VALUES('tg') ")
     updateResultsRows("")
 }
 
@@ -34,8 +35,6 @@ function displayResultsRows() {
         li.className = "recipe_suggestion"
         li.innerText = toDisplay[i][1];
         
-         // Add a click event to open the full recipe.
-        li.addEventListener('click', function() { editrecipe(toDisplay[i][0]); });
         
         listElement.appendChild(li);
     }
@@ -54,7 +53,6 @@ function updateResultsRows(query) {
             currentResultsRows.splice(i,1)
         }
     }
-    console.log(currentResultsRows.length)
     pageInput = document.getElementById("page-input")
     pageInput.max = Math.ceil(currentResultsRows.length / itemsPerPage);
     pageInput.value = 1
@@ -66,23 +64,6 @@ function updateResultsRows(query) {
 
 }
 
-function editrecipe(id) {
-    const res = DB.exec(`SELECT id, title, original_ingredients_list, instructions_list FROM recipes WHERE id=${id}`);
-    if (res.length === 0) return;
-
-    const [recipe] = res[0].values;
-    document.getElementById('titre').value = recipe[1];
-    document.getElementById('ingredients').value = recipe[2];
-    document.getElementById('instructions').value = recipe[3];
-
-    document.getElementById('form-edit').onsubmit = (e) => {
-        e.preventDefault();
-        updaterecipe(id);
-    };
-
-    document.getElementById('recipe-list').classList.add('hidden');
-    document.getElementById('recipe-edit').classList.remove('hidden');
-}
 
 function updaterecipe(id) {
     const titre = document.getElementById('titre').value;
@@ -120,12 +101,23 @@ function handle_page_input(){
 
 
 
-document.getElementById('search-bar').addEventListener("change", function(event) {
+document.getElementById('search-bar').addEventListener("keyup", function(event) {
     event.preventDefault(); 
     updateResultsRows(event.target.value)
 });
 
-document.getElementById('page-input').addEventListener("change", (e) => {
+// inputElement.addEventListener('keydown', function(event) {
+//   // Si la touche appuyée est le Enter (code de clavier : 13)
+//   if (event.which === 13 || event.keyCode === 13) {
+//     // Empêcher le navigateur d'effectuer l'action par défaut
+//     event.preventDefault();
+    
+//     // Perdre le focus à l'élément input
+//     this.blur();
+//   }
+// });
+
+document.getElementById('page-input').addEventListener("keyup", (e) => {
     if (e.target.className != "page-btn-disabled"){
         handle_page_input()
         displayResultsRows()
