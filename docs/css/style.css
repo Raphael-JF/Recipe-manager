@@ -7,8 +7,14 @@
 
 :root {
     --header-height: clamp(2.5rem, calc(3vw + 1rem), 5rem);
-    --search-bar-width: clamp(15rem, calc(20vw + 15rem), 45rem);
+    --search-bar-width: clamp(15rem, calc(20vw + 10rem), 45rem);
     --font-size:clamp(0.5rem, calc(0.25vw + 1rem), 3rem);
+}
+
+ul{
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding-inline-start: 0;
 }
 
 body {
@@ -20,7 +26,7 @@ body {
     grid-template-areas: 
     "navbar"
     "main";
-    min-height: 100vh;
+    min-height: 100%;
     background: #ffffff;
 }
 

@@ -2,33 +2,40 @@
     display: grid;
     grid-template-areas: "icon input";
     grid-template-columns: auto 1fr;
-    width:var(--search-bar-width);
     gap: 10px;
-    flex-basis: 52px;
-    flex-shrink: 0;
-    flex-grow: 0;
-    border: 1px solid #dadce0;
-    align-items: center;
-    border-radius: 26px;
+
+    width: var(--search-bar-width); /* limite si nécessaire */
     padding: 0 12px;
-    box-shadow: 0px 3px 10px 0px rgba(31, 31, 31, 0.08);
+    height: 52px;
+    align-items: center;       /* centre verticalement contenu */
+    border: 1px solid #dadce0;
+    border-radius: 26px;
+    box-shadow: 0px 3px 10px 0 rgba(31,31,31,0.08);
+
+    box-sizing: border-box;    /* inclut padding dans largeur */
 }
 
-#search-bar-div img{
+#search-bar-div img {
     grid-area: icon;
-    color: #9aa0a6;
+    display: block;       /* évite décalage inline */
+    height: 24px;         /* ajuste selon ton design */
+    width: auto;
+    margin: auto 0;       /* centre verticalement */
 }
 
-#search-bar-div textarea{
+#search-bar-div textarea {
     grid-area: input;
     font-family: "Computer Modern Bright";
-    font-size: 25px;
-    height: 25px;
-    border:none;
-    color: #000000;
-    background-color: transparent;
-    width: auto;
+    font-size: 20px;      /* légèrement réduit pour mobile */
+    line-height: 1.2;     /* assure le centrage vertical */
+    height: 1.2em;        /* adapte à la ligne */
+    border: none;
+    background: transparent;
+    color: #000;
+    width: 100%;           /* prend tout l’espace restant */
     outline: none;
     resize: none;
-    overflow:hidden;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
 }
