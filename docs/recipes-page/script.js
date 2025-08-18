@@ -1,5 +1,5 @@
 const DB_PATH = '../recipes.db'
-const itemsPerPage = 10
+const itemsPerPage = 24
 
 let currentPage = 1;
 let currentResultsRows = [];
@@ -118,10 +118,12 @@ document.getElementById('search-bar').addEventListener("keyup", function(event) 
 // });
 
 document.getElementById('page-input').addEventListener("keyup", (e) => {
-    if (e.target.className != "page-btn-disabled"){
-        handle_page_input()
-        displayResultsRows()
-    }
+    handle_page_input()
+    displayResultsRows()
+})
+
+document.getElementById('page-input').addEventListener("click", (e) => {
+    document.getElementById('page-input').value = "";
 })
 
 document.getElementById('next').addEventListener("click", (e) => {
