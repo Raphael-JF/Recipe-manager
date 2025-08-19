@@ -3,10 +3,8 @@
     align-items: center;
     justify-content: space-between; 
     gap:20px;
-    max-width: 700px;
-    flex-basis: 50px;
-    flex-shrink: 0;
-    flex-grow: 0;
+    /* max-width: 700px; */
+    flex : 0 0 50px;
     margin-bottom: 40px;
 }
 
@@ -14,6 +12,7 @@
     display: flex;
     align-items: center;
     height: 90%;
+    flex: 1; /* le conteneur s’étend lui aussi */
 }
 
 @media(max-width: 400px) {
@@ -28,17 +27,17 @@
 }
 
 #page-input-container input{
-    /* width: clamp(1.5em,calc(4vw + 0.75em),2em); */
-    width:3ch;
-    max-width: 7ch; /* 4 caractères */
-    font-size: calc(var(--font-size)-1em);
+    flex: 1 0 auto;
     height: 65%;
+    font-size: 20px;
+    min-width: 0; /* important pour éviter qu’il déborde */
     
 }
 
 #page-input-container p {
     margin-left: 10px;
-    font-size: (var(--font-size));
+    font-size: 20px;
+
 }
 
 

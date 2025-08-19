@@ -25,12 +25,50 @@
             <img src="../assets/search-icon.svg" alt="Search Icon" id="search-icon">
             <textarea id="search-bar" onkeydown="return (event.keyCode != 13);" placeholder="Rechercher une recette..."></textarea>
         </div>
-        <ul id="recipes-list"></ul>
+        <ul id="recipes-list">
+            <li class="recipe_suggestion">
+                <div class = "left-part">
+                    <h2 class="titre">Titre recette</h2>
+                    <p class="description">Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…</p>
+                    <p class="ingredients">Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3</p>
+                </div>
+                <div class="right-part">
+                    <span class="language">FR</span>
+                    <span class="grade">★★★☆☆</span>
+                    <span></span>
+                </div>
+            </li>
+            <li class="recipe_suggestion">
+                <div class = "left-part">
+                    <h2 class="titre">Titre recette</h2>
+                    <p class="description">Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…</p>
+                    <p class="ingredients">Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3</p>
+                </div>
+                <div class="right-part">
+                    <span class="language">FR</span>
+                    <span class="grade">★★★☆☆</span>
+                    <span></span>
+                </div>
+            </li>
+            <li class="recipe_suggestion">
+                <div class = "left-part">
+                    <h2 class="titre">Titre recette</h2>
+                    <p class="description">Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…Une petite description rapide de la recette…</p>
+                    <p class="ingredients">Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3Ingrédient 1, Ingrédient 2,Ingrédient 3</p>
+                </div>
+                <div class="right-part">
+                    <span class="language">FR</span>
+                    <span class="grade">★★★☆☆</span>
+                    <span></span>
+                </div>
+            </li>
+            <!-- More recipe suggestions can be added here -->
+        </ul>
         <div id="pagination">
             <button id="prev" class="page-btn-disabled">Précédent</button>
             <div id="page-input-container">
                 <label for="page-input">Page</label>
-                <input type="number" id="page-input" min="1" value="1" onkeypress="this.style.width = (this.value.length + 3) + 'ch';"><p>/20</p>
+                <input type="number" id="page-input" min="1" value="1" onblur="handle_page_input(); displayResultsRows()"><p>/20</p>
             </div>
             
             <button id="next" class="page-btn">Suivant</button>

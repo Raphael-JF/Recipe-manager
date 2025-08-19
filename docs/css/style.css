@@ -58,7 +58,9 @@ main {
 
 
 nav a {
-    display: inline-block; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #333;  
     color: rgb(235, 235, 235);
     padding: 8px 12px;  
@@ -89,31 +91,73 @@ h1 {
 ul#recipes-list {
     display: flex;
     justify-content: center;
-    align-items: start;
+    align-items: stretch;
     flex-shrink: 1;
     flex-grow: 1;
     flex-wrap: wrap;
     width:80%;
-    grid-gap: 20px;
+    gap: 20px;
     list-style: none;
 }
 
 ul li.recipe_suggestion {
-    flex-grow: 1;
-    flex-shrink : 1;
+    flex: 1 1 350px;
     cursor: pointer;
-    height: 125px;
-    width:350px;
+    min-height: 125px;
+    max-height: 200px;
     border: #d0d8e0 1px solid;
     border-radius: 20px;
     box-shadow: 0px 3px 10px 0px rgba(31, 31, 31, 0.08);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: minmax(auto, 200px);
+    gap: 15px;
+    padding: 15px;
+    background-color: rgba(255,255,255,0.9);
 
 }
 ul li.recipe_suggestion:hover{
     text-decoration: underline;
 }
 
+ul li.recipe_suggestion .right-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
 
+ul li.recipe_suggestion .right-part span.grade {
+    text-shadow: 0 0 5px rgba(241,196,15,0.6);
+    font-size: 1.75em;
+}
+
+ul li.recipe_suggestion .left-part {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+ul li.recipe_suggestion .left-part h2 {
+    color: #2c7be5;
+    flex : 0 1 auto;
+}
+
+ul li.recipe_suggestion .left-part p.description {
+    flex: 1 1 40%;
+    color: #333;
+    overflow: hidden;
+}
+
+ul li.recipe_suggestion .left-part p.ingredients {
+    flex: 1 1 20%;
+    overflow: hidden;
+    background: rgba(44,123,229,0.1);
+    padding: 8px;
+    border-radius: 5px;
+}
 
 .hidden {
     display: none;

@@ -87,7 +87,7 @@ def first_phase():
     c2 = conn2.cursor()
 
     c.execute("DROP TABLE IF EXISTS ingredients")
-    c.execute("CREATE TABLE ingredients (id INTEGER PRIMARY KEY, name_fr TEXT, name_en TEXT, density REAL);")
+    c.execute("CREATE TABLE ingredients (id INTEGER PRIMARY KEY, fr_name TEXT, en_name TEXT, density REAL);")
 
     # Fetch all rows from the recipes table
     c.execute("SELECT * FROM recipes")
@@ -116,15 +116,15 @@ def first_phase():
                 remove_recipe(recipe_row[0])
             else:
                 ingredient = obj.name[0].text
-                c.execute("SELECT * FROM ingredients WHERE name_en=?", [ingredient])
+                c.execute("SELECT * FROM ingredients WHERE en_name=?", [ingredient])
                 data = c.fetchone()
                 if not data:
-                    c2.execute("SELECT density FROM densites WHERE name_en=?", [ingredient])
+                    c2.execute("SELECT density FROM densites WHERE en_name=?", [ingredient])
                     density = c2.fetchone()
                     if density != None:
-                        c.execute("INSERT INTO ingredients(name_en, density) VALUES (?, ?)", [ingredient, float(density[0])])
+                        c.execute("INSERT INTO ingredients(en_name, density) VALUES (?, ?)", [ingredient, float(density[0])])
                     else:
-                        c.execute("INSERT INTO ingredients(name_en, density) VALUES (?, ?)", [ingredient, None])
+                        c.execute("INSERT INTO ingredients(en_name, density) VALUES (?, ?)", [ingredient, None])
 
 
 #-----------------------------------------------
@@ -142,14 +142,14 @@ def second_phase():
     c.execute("""
 CREATE TABLE recipe_ingredients(
     id INTEGER PRIMARY KEY, 
-    id_ingredient INT, 
-    id_recipe INT, 
+    ingredient_id INT, 
+    recipe_id INT, 
     original_amount TEXT,
     original_sentence TEXT,
     amount TEXT,
     unit TEXT,
-    FOREIGN KEY (id_ingredient) REFERENCES ingredients(id), 
-    FOREIGN KEY (id_recipe) REFERENCES recipes(id)
+    FOREIGN KEY (ingredient_id) REFERENCES ingredients(id), 
+    FOREIGN KEY (recipe_id) REFERENCES recipes(id)
 );"""
     )
 
@@ -226,7 +226,7 @@ CREATE TABLE recipe_ingredients(
 
            
             ingredient = obj.name[0].text
-            c.execute("SELECT id FROM ingredients WHERE name_en=?", [ingredient])
+            c.execute("SELECT id FROM ingredients WHERE en_name=?", [ingredient])
             ingredient_id = c.fetchone()
             if obj.amount != []:
                 obj_amount = obj.amount[0].text
@@ -234,8 +234,8 @@ CREATE TABLE recipe_ingredients(
                 obj_amount = ""
             c.execute("""
                         INSERT INTO recipe_ingredients(
-                        id_ingredient, 
-                        id_recipe, 
+                        ingredient_id, 
+                        recipe_id, 
                         original_amount,
                         original_sentence,
                         amount,
@@ -258,9 +258,14 @@ if __name__ == "__main__":
     c.execute("ALTER TABLE recipes RENAME Title TO title;")
     c.execute("ALTER TABLE recipes RENAME Ingredients TO original_ingredients_list;")
     c.execute("ALTER TABLE recipes RENAME Instructions TO instructions_list;")
+    c.execute("ALTER TABLE recipes ADD COLUMN description TEXT;")
     c.execute("ALTER TABLE recipes ADD COLUMN language TEXT;")
-    c.execute("ALTER TABLE recipes ADD COLUMN grade TEXT;")
+    c.execute("ALTER TABLE recipes ADD COLUMN grade INT;")
     c.execute("UPDATE recipes SET language = 'english' WHERE 1=1")
+    c.execute("UPDATE recipes SET description = '' WHERE 1=1")
+    c.execute("UPDATE recipes SET grade = 0 WHERE 1=1")
+
+
 
 
 
