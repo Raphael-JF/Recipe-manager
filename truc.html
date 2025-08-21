@@ -2,35 +2,35 @@
 <html>
     <head>
         <style>
-            *{
-                margin:0;
-                padding: 0;
-            }
-            .container {
-                margin: 0;
-                max-height: 100vh;
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-                align-items: center; 
-            }
-            
-            .item1, .item2, .item3 {
-                height: 400px;
-                background-color: cyan;
-                 /* ou toute autre valeur que vous souhaitez */
-            }
-            
-            .item1 {
-                flex-grow: 1; /* cet élément va essayer d'agrandir pour couvrir tout l'espace disponible */
-            }
+            .tags {
+  display: flex;
+  flex-wrap: wrap; /* autorise les retours à la ligne */
+  gap: 8px;        /* espace entre les tags */
+  max-width: 300px; /* largeur limite de ton conteneur */
+  border: 1px solid black;
+  height: 50px;
+  line-clamp:2;
+  -webkit-line-clamp: 2;
+}
+
+.tag {
+  padding: 6px 12px;
+  border-radius: 999px; /* forme pillule */
+  background-color: #f0f4ff;
+  border: 1px solid #d0d8e8;
+  font-size: 14px;
+  white-space: nowrap;  /* jamais couper en plein milieu */
+}
+
         </style>
     </head>
     <body>
-        <div class="container">
-            <div class="item1">Item 1</div>
-            <div class="item2">Item 2</div>
-            <div class="item3">Item 3</div>
+        <div class="tags">
+            <span class="tag">chamomile tea bags</span>
+            <span class="tag">reposado tequila</span>
+            <span class="tag">fresh lemon juice</span>
+            <span class="tag">simple syrup</span>
         </div>
+
     </body>
 </html>

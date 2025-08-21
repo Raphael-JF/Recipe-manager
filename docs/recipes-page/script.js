@@ -4,6 +4,20 @@ const itemsPerPage = 10
 let currentPage = 1;
 let currentResultsRows = [];
 
+function checkOverflow(el){
+   var curOverflow = el.style.overflow;
+
+   if ( !curOverflow || curOverflow === "visible" )
+      el.style.overflow = "hidden";
+
+   var isOverflowing = el.clientWidth < el.scrollWidth 
+      || el.clientHeight < el.scrollHeight;
+
+   el.style.overflow = curOverflow;
+
+   return isOverflowing;
+}
+
 let DB;
 let SQL;
 
@@ -25,7 +39,8 @@ function format_language(lang) {
 
 function getIngredientNames(recipe_id) {
     let res = DB.exec(`SELECT ingredients.en_name FROM ingredients JOIN recipe_ingredients ON ingredients.id = recipe_ingredients.ingredient_id JOIN recipes ON recipes.id = recipe_ingredients.recipe_id WHERE recipes.id = ?`, [recipe_id]);
-    return res[0].values.map(row => row[0]).join(", ");
+    res[0].values = res[0].values.slice(0, 8);
+    return res[0].values.map(ing => `<span class="ingredient-tag">${ing}</span>`).join("");
 }
 
 // -------------Backend-----------------
