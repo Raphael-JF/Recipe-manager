@@ -50,9 +50,11 @@ nav {
 main {
     grid-area: main;
     display: flex;
-    gap: 40px;
+    gap: 30px;
     flex-direction: column;
     align-items: center; 
+    padding-top: 20px;
+    padding-bottom: 20px;
     /* overflow: hidden; */
 }
 
@@ -71,7 +73,7 @@ nav a {
 
 button {
     border:none;
-    background: #c4d3e9;
+    background: #e6f0ff;
     border-radius: 20px;
     cursor: pointer;
     padding: 0px 10px;
@@ -79,7 +81,7 @@ button {
     letter-spacing: 1px;
 }
 button:hover {
-    background: #98b6e2;
+    background: #c9dfff;
     
 }
 
@@ -91,111 +93,7 @@ h2{
     font-size: clamp(1rem, calc(0.5vh + 1rem), 2.5rem);
 }
 
-ul#recipes-list {
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    flex-shrink: 1;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    width:80%;
-    gap: 20px;
-    list-style: none;
-}
 
-ul li.recipe_suggestion {
-    flex: 1 1 clamp(120px, 25vw, 350px);
-    cursor: pointer;
-    min-height: 125px;
-    border: #d0d8e0 1px solid;
-    border-radius: 20px;
-    box-shadow: 0px 3px 10px 0px rgba(31, 31, 31, 0.08);
-    display: grid;
-    grid-template-columns: minmax(auto, 1fr) auto;
-    grid-template-rows: 200px;
-    gap: 15px;
-    padding: 15px;
-    background-color: rgba(255,255,255,0.9);
-
-}
-ul li.recipe_suggestion:hover{
-    text-decoration: underline;
-}
-
-ul li.recipe_suggestion .right-part {
-    flex-shrink: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-
-ul li.recipe_suggestion .right-part span.grade {
-    text-shadow: 0 0 5px rgba(241,196,15,0.6);
-    font-size: auto;
-}
-
-ul li.recipe_suggestion .left-part {
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-    justify-content: space-between;
-    align-items: flex-start;
-    overflow: hidden;
-}
-
-ul li.recipe_suggestion .left-part h2 {
-    color: #2c7be5;
-    flex : 1 0;
-}
-
-ul li.recipe_suggestion .left-part p.description {
-    color: #333;
-    overflow: hidden;
-}
-
-.ingredients {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 5px 0;
-    min-width: 0; /* Permet aux enfants de rétrécir */
-}
-
-.ingredient-tag {
-    display: inline-block;
-    background: #f1f7ff;
-    border-radius: 20px;
-    padding: 5px 12px;
-    font-size: 0.95em;
-    box-shadow: 0 1px 4px rgba(44,123,229,0.07);
-    transition: background 0.2s;
-    cursor: default;
-    white-space: nowrap;
-    max-width: 100px; /* Largeur max par défaut */
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-@media (max-width: 700px) {
-    .ingredient-tag {
-        max-width: 70px;
-        font-size: 0.9em;
-    }
-}
-
-@media (max-width: 500px) {
-    .ingredient-tag {
-        max-width: 50px;
-        font-size: 0.85em;
-        padding: 4px 8px;
-    }
-}
-
-.ingredient-tag:hover {
-    background: #e0e0e0;
-}
 
 .hidden {
     display: none;
