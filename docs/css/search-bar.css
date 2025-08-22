@@ -23,7 +23,7 @@
     margin: auto 0;       /* centre verticalement */
 }
 
-#search-bar-div textarea {
+#search-bar-div input {
     grid-area: input;
     font-family: "Computer Modern Bright";
     font-size: 20px;      /* légèrement réduit pour mobile */

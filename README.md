@@ -7,3 +7,7 @@ Note to myself (the dev) : launch local server with "python -m http.server 8000"
 - grading recipes
 - categorizing recipes (dessert, bakery, meal, drink, etc.)
  
+
+ #CREDITS
+
+ Most of the recipes are from https://github.com/josephrmartinez/recipe-dataset.

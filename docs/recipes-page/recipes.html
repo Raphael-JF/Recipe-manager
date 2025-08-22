@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion Recettes</title>
 
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/pagination.css">
     <link rel="stylesheet" href="../css/search-bar.css">
     <link rel="stylesheet" href="../css/recipes-list.css">
-    
+    <link rel="stylesheet" href="../css/spinner.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+
     <link href="https://cdn.jsdelivr.net/gh/vsalvino/computer-modern@main/fonts/bright.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="../js/sql-wasm.js"></script>
 </head>
 <body>
-    <nav>
-        <a href="recipes.html" style="background-color: rgb(92, 92, 92);">Recettes</a>
-        <a href="ingredients.html">Ingrédients</a>
+    <nav class="navbar">
+        <a href="recipes.html" class="nav-btn active">Recettes</a>
+        <a href="../ingredients/ingredients.html" class="nav-btn">Ingrédients</a>
     </nav>
 
     <main>
         <h1>📖 Recettes 📖</h1>
         <div id="search-bar-div">
             <img src="../assets/search-icon.svg" alt="Search Icon" id="search-icon">
-            <textarea id="search-bar" onkeydown="return (event.keyCode != 13);" placeholder="Rechercher une recette..."></textarea>
+            <input type="text" id="search-bar" onblur="updateResultsRows(event.target.value)" placeholder="Rechercher une recette...">
+        </div>
+        <div id="loading-spinner">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <p>Chargement...</p>
         </div>
         <ul id="recipes-list">
             <!-- More recipe suggestions can be added here -->

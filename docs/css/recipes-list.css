@@ -25,9 +25,6 @@ li.recipe_suggestion {
     background-color: rgba(255,255,255,0.9);
 
 }
-li.recipe_suggestion:hover{
-    text-decoration: underline;
-}
 
 
 .title-lang{

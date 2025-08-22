@@ -47,11 +47,14 @@ function formatDescription(description) {
 function getIngredientNames(recipe_id) {
     let res = DB.exec(`SELECT ingredients.en_name FROM ingredients JOIN recipe_ingredients ON ingredients.id = recipe_ingredients.ingredient_id JOIN recipes ON recipes.id = recipe_ingredients.recipe_id WHERE recipes.id = ?`, [recipe_id]);
     res[0].values = res[0].values.slice(0, 8);
-    return res[0].values.map(ing => `<span class="ingredient-tag">${ing}</span>`).join("");
+    return res[0].values.map(ing => `<span title="${ing}" class="ingredient-tag">${ing}</span>`).join("");
 }
 
 // -------------Backend-----------------
 async function initDB() {
+    document.getElementById("loading-spinner").style.display = "flex";
+    document.getElementById("pagination").style.display = "none";
+    document.getElementById("recipes-list").style.display = "none";
     SQL = await initSqlJs({
         locateFile: file => `../js/sql-wasm.wasm`
     });
@@ -59,7 +62,6 @@ async function initDB() {
     const response = await fetch(DB_PATH);
     const buffer = await response.arrayBuffer();
     DB = new SQL.Database(new Uint8Array(buffer));
-    // DB.exec("INSERT INTO recipes(title) VALUES('tg') ")
     updateResultsRows("")
 }
 
@@ -100,6 +102,11 @@ function displayResultsRows() {
 
 function updateResultsRows(query) {
 
+    // first, show loading spinner
+    document.getElementById("loading-spinner").style.display = "flex";
+    document.getElementById("pagination").style.display = "none";
+    document.getElementById("recipes-list").style.display = "none";
+
     let res = DB.exec("SELECT id, title, description, grade, language FROM recipes");
 
     currentResultsRows = res[0].values;
@@ -119,6 +126,11 @@ function updateResultsRows(query) {
     document.getElementById("page-input-container").children[2].textContent = "/ "+document.getElementById('page-input').max
 
     displayResultsRows()
+
+    //finally, hide loading spinner
+    document.getElementById("loading-spinner").style.display = "none";
+    document.getElementById("pagination").style.display = "flex";
+    document.getElementById("recipes-list").style.display = "flex";
 
 }
 
@@ -144,10 +156,14 @@ function handle_page_input(){
 }
 
 
-document.getElementById('search-bar').addEventListener("keyup", function(event) {
-    event.preventDefault(); 
-    updateResultsRows(event.target.value)
-});
+document.getElementById('search-bar').addEventListener("keyup", (e) => {
+    //key code for enter
+ if (e.key === 'Enter') {
+    
+    e.preventDefault();
+    e.target.blur();
+ }
+})
 
 document.getElementById('page-input').addEventListener("keyup", (e) => {
     //key code for enter
