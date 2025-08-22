@@ -22,11 +22,11 @@ let DB;
 let SQL;
 
 // -----------------Helpers-----------------------------
-function int_to_stars(int){
+function intToStars(int){
     return "★".repeat(int) + "☆".repeat(5 - int);
 }
 
-function format_language(lang) {
+function formatLanguage(lang) {
     if (lang == "english"){
         return "EN"
     }else if(lang == "french"){
@@ -36,6 +36,13 @@ function format_language(lang) {
     }
 }
 
+function formatDescription(description) {
+    if (!description) {
+        return "Description vide.";
+    } else {
+        return description;
+    }
+}
 
 function getIngredientNames(recipe_id) {
     let res = DB.exec(`SELECT ingredients.en_name FROM ingredients JOIN recipe_ingredients ON ingredients.id = recipe_ingredients.ingredient_id JOIN recipes ON recipes.id = recipe_ingredients.recipe_id WHERE recipes.id = ?`, [recipe_id]);
@@ -71,15 +78,16 @@ function displayResultsRows() {
         let grade = toDisplay[i][3];
         let language = toDisplay[i][4];
         li.innerHTML = `
-            <div class="left-part">
+            <div class="title-lang">
                 <h2 class="title">${title}</h2>
-                <p class="description">${description}</p>
-                <p class="ingredients">${getIngredientNames(recipe_id)}</p>
+                <span class="language">${formatLanguage(language)}</span>
             </div>
-            <div class="right-part">
-                <span class="language">${format_language(language)}</span>
-                <span class="grade">${int_to_stars(grade)}</span>
-                <span></span>
+            <div class="description-grade">
+                <p class="description">${formatDescription(description)}</p>
+                <span class="grade">${intToStars(grade)}</span>
+            </div>
+            <div class="ingredients">
+                ${getIngredientNames(recipe_id)}
             </div>
         `;
         // Insert recipe information into the 'li' element.
@@ -132,6 +140,7 @@ function handle_page_input(){
     else{
         document.getElementById('next').className = "page-btn"
     }
+    window.scrollTo(0, 0);
 }
 
 
