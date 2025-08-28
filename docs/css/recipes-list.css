@@ -36,7 +36,6 @@ li.recipe_suggestion {
 }
 
 .title-lang h2 {
-    color: #2c7be5;
     flex : 1 0;
 }
 
@@ -68,7 +67,6 @@ li.recipe_suggestion {
     font-size: 0.95em;
     box-shadow: 0 1px 4px rgba(44,123,229,0.07);
     transition: background 0.2s;
-    cursor: default;
     white-space: nowrap;
     width: fit-content;
     max-width: 100%; /* Largeur max par défaut */

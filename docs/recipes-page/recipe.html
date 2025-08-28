@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/spinner.css">
+    <link rel="stylesheet" href="../css/general.css">
+    <link rel="stylesheet" href="../css/navbar.css">
+
+    <link href="https://cdn.jsdelivr.net/gh/vsalvino/computer-modern@main/fonts/bright.css" rel="stylesheet">
+    <script src="../js/sql-wasm.js"></script>
+    <style>
+        #recipe-header{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        #recipe-header header {
+            flex-shrink: 2.5;
+            margin: 35px 0;
+            padding: 0px 10px;
+            display: flex;
+            gap:40px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #recipe-title{
+            text-align: center;
+            color: #2c7be5; 
+            text-decoration: underline;
+        }
+
+        #recipe-description{
+            align-self: flex-start;
+            padding-left: 3em;
+        }
+
+        #recipe-header button {
+            margin: 0px 2vw;
+        }
+
+
+        td span {
+            background-color: #ffffff;
+        }
+        
+        #recipe-ingredients td.ing_name span {
+        display: flex;
+        align-items: center;
+}
+
+        #recipe-ingredients td.ing_name span::after {
+        content: "";
+        flex: 1; /* prend tout l'espace dispo */
+        border-bottom: 2px dotted black; /* la ligne pointillée */
+        padding-right: 1em;
+        margin: 0 8px; /* espace entre le texte et la ligne */
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="recipes.html" class="nav-btn active">Recettes</a>
+        <a href="../ingredients/ingredients.html" class="nav-btn">Ingrédients</a>
+    </nav>
+
+    <main>
+        <div id="recipe-header">
+            <button id="edit-recipe-btn">
+                <img src="../assets/cross.svg" alt="Arrow back icon">
+                <p>Retour</p>
+            </button>
+            <header>
+                <h1 id="recipe-title"></h1>
+                <p id="recipe-description">aaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+            </header>
+            <button id="edit-recipe-btn">
+                <img src="../assets/edit.svg" alt="Edit Icon">
+                <p>Modifier</p>
+            </button>
+        </div>
+        <div id="loading-spinner">
+            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+            <p>Chargement...</p>
+        </div>
+        <table id="recipe-ingredients">
+            <tr>
+                <td class="ing_name"><span>Drug 1</span></td>
+                <td class="amount"><span>10mL</span></td>
+            </tr>
+            <tr>
+                <td class="ing_name"><span>Another drug</span></td>
+                <td class="amount"><span>50mL</span></td>
+            </tr>
+            <tr>
+                <td class="ing_name"><span>Third</span></td>
+                <td class="amount"><span>100mL</span></td>
+            </tr>
+        </table>
+
+    </main>
+
+    <script src="recipe.js"></script>
+</body>
+</html>

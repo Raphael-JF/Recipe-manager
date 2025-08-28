@@ -119,7 +119,7 @@ def first_phase():
                 c.execute("SELECT * FROM ingredients WHERE en_name=?", [ingredient])
                 data = c.fetchone()
                 if not data:
-                    c2.execute("SELECT density FROM densites WHERE en_name=?", [ingredient])
+                    c2.execute("SELECT density FROM densites WHERE name_en=?", [ingredient])
                     density = c2.fetchone()
                     if density != None:
                         c.execute("INSERT INTO ingredients(en_name, density) VALUES (?, ?)", [ingredient, float(density[0])])
@@ -183,7 +183,7 @@ CREATE TABLE recipe_ingredients(
                         if obj.amount[0].amounts[0].unit.is_compatible_with(UREG.liter):
                             db_amount = str(float(obj.amount[0].convert_to("mL").magnitude))
                             db_unit = "mL"
-                        elif obj.amount[0].amounts[0].unit.is_compatible_with(UREG.mass):
+                        elif obj.amount[0].amounts[0].unit.is_compatible_with(UREG.gram):
                             db_amount = str(float(obj.amount[0].convert_to("g").magnitude))
                             db_unit = "g"
                     except:
@@ -208,9 +208,10 @@ CREATE TABLE recipe_ingredients(
                                 db_amount = str(float(obj.amount[0].quantity))
                         db_unit = obj.amount[0].unit
                     elif obj.amount[0].unit.is_compatible_with(UREG.liter):
-                            db_amount = str(float(obj.amount[0].convert_to("mL").quantity))
-                            db_unit = "mL"
-                    elif obj.amount[0].unit.is_compatible_with(UREG.mass):
+                            
+                        db_amount = str(float(obj.amount[0].convert_to("mL").quantity))
+                        db_unit = "mL"
+                    elif obj.amount[0].unit.is_compatible_with(UREG.gram):
                         db_amount = str(float(obj.amount[0].convert_to("g").quantity))
                         db_unit = "g"
             except IndexError:
