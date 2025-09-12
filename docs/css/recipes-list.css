@@ -37,6 +37,8 @@ li.recipe_suggestion {
 
 .title-lang h2 {
     flex : 1 0;
+    color: #2c7be5;
+
 }
 
 .description-grade {

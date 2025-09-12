@@ -23,8 +23,10 @@ body {
     padding: 0;
     display: grid;
     grid-template-rows: var(--header-height) 1fr ;
+    grid-gap: 1em;
     grid-template-areas: 
     "navbar"
+    "header"
     "main";
     min-height: 100%;
     background: #ffffff;
@@ -38,9 +40,11 @@ main {
     gap: 30px;
     flex-direction: column;
     align-items: center; 
-    padding-top: 20px;
-    padding-bottom: 20px;
     /* overflow: hidden; */
+}
+
+header {
+    grid-area: header;
 }
 
 
@@ -89,6 +93,5 @@ h1 {
 
 h2{
     font-size: clamp(1rem, calc(0.5vh + 1rem), 2.5rem);
-    color: #2c7be5;
 }
 

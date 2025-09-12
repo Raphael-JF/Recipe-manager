@@ -1,5 +1,5 @@
 const DB_PATH = '../recipes.db'
-const itemsPerPage = 1
+const itemsPerPage = 10
 
 let currentPage = 1;
 let currentResultsRows = [];
